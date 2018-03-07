@@ -1,0 +1,152 @@
+/*
+Exercise 1
+For: CSC 22100 - F : Software Design Laboratory [ Fall 2016 ]
+Created by: Sebastian Grygorczuk
+Due: 09/28/2016
+*/
+
+ import java.awt.Graphics;
+ import javax.swing.JPanel;
+ import javax.swing.JOptionPane;
+ import java.awt.Color;
+ import java.util.Scanner;
+ 
+ /*
+ Description:
+ The class Shapes facilitates all of the work behind making the concentric
+ sequence of rectangles and ovals as well as collecting information on
+ a window chosen by the user.
+ */
+
+public class Shapes extends JPanel{
+    private int width;
+    private int height;
+    private int times;
+    
+    /*
+    Description:
+    The only construct in the class, assigns the values to the private
+    variables, width height and times.  
+    */
+    
+    public Shapes(int userWidth, int userHeight, int userTimes)
+    {
+        width = userWidth;
+        height = userHeight;
+        times = userTimes;
+        
+     }
+    
+     /*
+     Description:
+     The Question method has no parameters
+     and no return values, it's only purpose is to
+     print out a question as to which color the user wants
+     to use.
+     */
+    
+      public void  Question ()
+     {
+        System.out.println(
+        "Set the color you wish for the shape to be: "  + "(1) Black,"
+         + " (2) Blue," +" (3) Cyan," +" (4) Dark Grey," + " (5) Gray,"
+         + " (6) Green," + " (7) Light Grey," + " (8) Magenta,"
+         + " (9) Orange," + " (10) Pink," + " (11) Red," + " (12) White,"
+         + " (13) Yellow?");
+     }
+    
+    
+     /*
+     Description:
+     The settingColor method takes two parameters,  
+     an integer and the other a Graphic, the integer is used to
+     pick a choice from a switch statement and then the graphic
+     gets assign the chosen color
+     */
+    
+     public void settingColor(int choiceNumber, Graphics g)
+     {
+         switch(choiceNumber)
+         {
+         case 1:
+             g.setColor(Color.BLACK);
+             break;
+         case 2:
+             g.setColor(Color.BLUE);
+             break;
+         case 3:
+             g.setColor(Color.CYAN);
+             break;
+         case 4:
+             g.setColor(Color.DARK_GRAY);
+             break;
+         case 5:
+             g.setColor(Color.GRAY);
+             break;
+         case 6:
+             g.setColor(Color.GREEN);
+             break;
+         case 7:
+             g.setColor(Color.LIGHT_GRAY);
+             break;
+         case 8:
+             g.setColor(Color.MAGENTA);
+             break;
+         case 9:
+             g.setColor(Color.ORANGE);
+             break;
+         case 10:
+             g.setColor(Color.PINK);
+             break;
+         case 11:
+             g.setColor(Color.RED);
+             break;
+         case 12:
+             g.setColor(Color.WHITE);
+             break;
+         case 13:
+             g.setColor(Color.YELLOW);
+             break;
+        default:
+             g.setColor(Color.GREEN);
+         }
+     }
+    
+    
+     /*
+     Description:
+     The paintComponent class takes in a Graphic parameter,
+     then using the provided, width height and times the program
+     creates a concentric sequence of rectangle and ovals each filled
+     with a color chosen by the user.
+    */
+    
+     public void paintComponent(Graphics g)
+     {
+         int widthValue = width/2;
+         int widthIndex = width/4;
+         int heightValue = height/2;
+         int heightIndex = height/4;
+         Scanner input = new Scanner(System.in);
+         super.paintComponent(g);
+        
+         for(int i = 0; i < times; i++)
+         {
+         Question();
+         settingColor(input.nextInt(),g);
+         g.fillRect(widthIndex, heightIndex, widthValue, heightValue);
+         Question();
+         settingColor(input.nextInt(),g);
+         g.fillOval(widthIndex, heightIndex, widthValue, heightValue);
+        
+         widthIndex += (widthValue - (5*widthValue)/7)/2; //5/7 is almost eqaul to sqrt(2)
+         heightIndex += (heightValue - (5*heightValue)/7)/2;
+         widthValue = 5*widthValue/7;
+         heightValue = 5*heightValue/7;
+        
+         }
+        
+         g.setColor(Color.BLACK);
+         g.drawLine(0, 0, width, height);
+    }
+}
