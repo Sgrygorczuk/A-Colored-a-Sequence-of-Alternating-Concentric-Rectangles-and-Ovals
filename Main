@@ -1,0 +1,44 @@
+Class 1: MainClass:
+/*
+Exercise 1
+For: CSC 22100 - F : Software Design Laboratory [ Fall 2016 ]
+Created by: Sebastian Grygorczuk
+Due: 09/28/2016
+*/
+import javax.swing.JFrame;
+import java.util.Scanner;
+
+/*
+Description:
+Main class acts as the class that the program will execute from,
+inside the main class the user will be asked what width and height
+do they want for the window, as well as how many time do they wish
+to repeat the sequence.  
+*/
+
+public class MainClass
+    {
+        public static void main(String[] args)
+        {
+        int width = 0;
+        int height = 0;
+        int times = 0;
+        Scanner Input = new Scanner(System.in);
+    
+        System.out.println ("What would you like the width to be?");
+         width = Input.nextInt();
+         System.out.println ("What would you like the height to be?");
+         height = Input.nextInt();
+         System.out.println("How many times do you want to repeat the sequence?");
+         times = Input.nextInt();
+         Shapes panel = new Shapes(width, height, times);
+    
+         JFrame application = new JFrame();
+    
+         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         application.add(panel);
+         application.setSize(width, height);
+         application.setVisible(true);
+
+    }
+}
